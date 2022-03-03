@@ -1,0 +1,7 @@
+-private/environment/*.d.ts
+-private/environment/*.js
+
+-private/index.d.ts
+-private/index.js
+
+tsconfig.tsbuildinfo

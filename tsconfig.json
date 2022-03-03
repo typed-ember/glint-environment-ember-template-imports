@@ -1,0 +1,12 @@
+{
+  "exclude": ["__tests__", "test-project"],
+  "compilerOptions": {
+    "target": "es2019",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "strict": true,
+    "esModuleInterop": true,
+    "declaration": true,
+    "sourceMap": false
+  }
+}
