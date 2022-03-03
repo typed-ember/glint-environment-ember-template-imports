@@ -26,3 +26,5 @@ interface Keywords
 }
 
 export interface Globals extends Keywords {}
+
+export const Globals: Globals;
