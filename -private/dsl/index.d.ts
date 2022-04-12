@@ -29,7 +29,7 @@ export declare function resolve<
   Args extends unknown[],
   Instance extends Invokable
 >(
-  item: new (...args: Args) => Instance
+  item: abstract new (...args: Args) => Instance
 ): (
   ...args: Parameters<Instance[typeof Invoke]>
 ) => ReturnType<Instance[typeof Invoke]>;
@@ -41,6 +41,9 @@ type OptNamed<N extends Record<string, unknown> | undefined> =
 export declare function resolve<Value, Args extends unknown[], T extends Value>(
   item: (value: Value, ...args: Args) => value is T
 ): (named: EmptyObject, value: Value, ...args: Args) => value is T;
+
+// no-arg functions are helpers
+export declare function resolve<T>(item: () => T): (named: EmptyObject) => T;
 
 // non-modifier functions with an `unknown` first arg, so a helper
 export declare function resolve<
