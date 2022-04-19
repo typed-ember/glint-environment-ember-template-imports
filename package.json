@@ -22,15 +22,15 @@
     "-private/**/*.{js,d.ts}"
   ],
   "peerDependencies": {
-    "@glint/environment-ember-loose": "^0.7.0",
+    "@glint/environment-ember-loose": "^0.7.5",
     "ember-template-imports": "^2.0.0"
   },
   "devDependencies": {
-    "@glint/config": "^0.7.0",
-    "@glint/core": "^0.7.0",
-    "@glint/environment-ember-loose": "^0.7.0",
-    "@glint/template": "^0.7.0",
-    "@glint/transform": "^0.7.0",
+    "@glint/config": "^0.7.5",
+    "@glint/core": "^0.7.5",
+    "@glint/environment-ember-loose": "^0.7.5",
+    "@glint/template": "^0.7.5",
+    "@glint/transform": "^0.7.5",
     "@types/ember": "^4.0.0",
     "@types/ember__helper": "^4.0.0",
     "@types/ember__modifier": "^4.0.0",
