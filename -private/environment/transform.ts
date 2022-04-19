@@ -31,13 +31,27 @@ export const transform: GlintExtensionTransform<PreprocessData> = (
       // Convert '[__T`foo`]' as an expression to just '__T`foo`'
       let location = findTemplateLocation(templateLocations, node);
 
-      return buildNodeForTemplate(f, node.elements[0], location);
+      let template = buildNodeForTemplate(f, node.elements[0], location);
+      setEmitMetadata(template, {
+        templateLocation: {
+          start: location.startTagOffset,
+          end: location.endTagOffset + location.endTagLength,
+        },
+      });
+      return template;
     } else if (isETITemplateProperty(ts, node)) {
       // Convert '[__T`foo`]' in a class body to 'static { __T`foo` }'
       let location = findTemplateLocation(templateLocations, node);
       let template = buildNodeForTemplate(f, node.name.expression, location);
 
-      setEmitMetadata(template, { prepend: 'static { ', append: ' }' });
+      setEmitMetadata(template, {
+        prepend: 'static { ',
+        append: ' }',
+        templateLocation: {
+          start: location.startTagOffset,
+          end: location.endTagOffset + location.endTagLength,
+        },
+      });
 
       return buildStaticBlockForTemplate(f, template);
     }
@@ -184,7 +198,7 @@ function buildNodeForTemplate(
   let prefix = ''.padStart(startTagLength - GLOBAL_TAG.length - '`'.length);
   let suffix = ''.padStart(endTagLength - '`'.length);
 
-  let template = f.createTaggedTemplateExpression(
+  return f.createTaggedTemplateExpression(
     node.tag,
     node.typeArguments,
     f.createNoSubstitutionTemplateLiteral(
@@ -192,9 +206,4 @@ function buildNodeForTemplate(
       typeof rawText === 'string' ? `${prefix}${rawText}${suffix}` : undefined
     )
   );
-
-  return Object.assign(template, {
-    pos: location.startTagOffset,
-    end: location.endTagOffset + location.endTagLength,
-  });
 }
